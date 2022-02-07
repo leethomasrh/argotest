@@ -3,6 +3,6 @@ kind: Namespace
 metadata:
   labels:
     kubernetes.io/metadata.name: argotest41
-    argocd.argoproj.io/managed-by=openshift-gitops
+    argocd.argoproj.io/managed-by: openshift-gitops
   name: argotest41
 spec: {}
