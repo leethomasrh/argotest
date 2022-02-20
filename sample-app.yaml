@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: sample-app
-  namespace: devops
+  namespace: app-one
 spec:
   destination:
     namespace: app-one
