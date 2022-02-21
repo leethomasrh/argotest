@@ -6,9 +6,7 @@ metadata:
   destination:
     namespace: app-one
     server: https://kubernetes.default.svc
-  project: app-one
-  syncPolicy:
-    automated: {}
+  project: default
   source:
     path: app
     repoURL: https://github.com/redhat-developer/openshift-gitops-getting-started
