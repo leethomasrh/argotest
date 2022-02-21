@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: sample-app
   namespace: devops
+spec:
   destination:
     namespace: app-one
     server: https://kubernetes.default.svc
