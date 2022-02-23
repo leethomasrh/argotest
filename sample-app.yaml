@@ -8,8 +8,6 @@ spec:
     namespace: app-one
     server: https://kubernetes.default.svc
   project: app-one
-  syncPolicy:
-    automated: {}  
   source:
     path: app
     repoURL: https://github.com/redhat-developer/openshift-gitops-getting-started
