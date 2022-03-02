@@ -226,11 +226,8 @@ This document will focus on doing everything via yaml files which will support t
     ```yaml
     kind: RoleBinding
     metadata:
-      creationTimestamp: "2022-02-17T15:26:36Z"
       name: admin
       namespace: devops
-      resourceVersion: "3078655"
-      uid: 646f9086-8c13-4651-8510-fba44f279d12
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
