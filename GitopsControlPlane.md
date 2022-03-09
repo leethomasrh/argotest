@@ -39,10 +39,8 @@ This document will focus on doing everything via yaml files which will support t
   
       In this example I'm using an htpasswd identity provider for simplicity.
 2. Add the user accounts
-    | |
     | :---: |
     | First developer account |
-    | |
     ```yaml
     apiVersion: user.openshift.io/v1
     groups: null
