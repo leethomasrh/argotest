@@ -51,7 +51,7 @@ This document will focus on doing everything via yaml files which will support t
       name: app-one
     ```
 
-    | Second developer account |
+   ##### Second developer account
 
     ```yaml
     apiVersion: user.openshift.io/v1
@@ -62,11 +62,8 @@ This document will focus on doing everything via yaml files which will support t
     metadata:
       name: app-two
     ```
-    | |
-    | :---: |
-    | Argo CD Audit account |
-    | granted read only permissions in ArgoCD |
-    | |
+   ##### Argo CD Audit account
+   ##### granted read only permissions in ArgoCD
 
     ```yaml
     apiVersion: user.openshift.io/v1
@@ -77,11 +74,8 @@ This document will focus on doing everything via yaml files which will support t
     metadata:
       name: argoaudit   
     ```
-    | |
-    | :---: |
-    | Argo CD Admin account |
-    | granted admin rights in ArgoCD and the Gitops Control Plane namespace | 
-    | |
+   ##### Argo CD Admin account
+   ##### granted admin rights in ArgoCD and the Gitops Control Plane namespace
 
     ```yaml
     apiVersion: user.openshift.io/v1
@@ -94,12 +88,10 @@ This document will focus on doing everything via yaml files which will support t
     ```
 
 3. Create the namespaces
-    | |
-    | :---: |
-    | devops namespace |
-    | This namespace will be used for the  Gitops Control Plane | 
-    | |
-    ```yaml
+   ##### devops namespace
+   ##### This namespace will be used for the  Gitops Control Plane
+   
+   ```yaml
     apiVersion: v1
     kind: Namespace
     metadata:
@@ -107,10 +99,8 @@ This document will focus on doing everything via yaml files which will support t
       kubernetes.io/metadata.name: devops
     name: devops
     ```
-    | |
-    | :---: |
-    | 1st Development team namespace: app-one |
-    | |
+    
+   ##### 1st Development team namespace: app-one
     
     Important considerations for the files below:
     * the label argocd.argoproj.io/managed-by needs to be set to the namespace the Gitops control plane instance will be running in.
@@ -124,10 +114,9 @@ This document will focus on doing everything via yaml files which will support t
       argocd.argoproj.io/managed-by: devops
     name: app-one
     ```
-    | |
-    | :---: |
-    | 2nd Development team namespaces: argotest21, argotest31, argotest41 |
-    | |
+
+   ##### 2nd Development team namespaces: argotest21, argotest31, argotest41
+
     ```yaml
     apiVersion: v1
     kind: Namespace
@@ -160,11 +149,10 @@ This document will focus on doing everything via yaml files which will support t
     ```
 
 4. Create the groups
-    | |
-    | :---: |
-    | argocdadmins |
-    | Anyone assigned to this group will have admin access in ArgoCD |
-    | |
+
+   ##### argocdadmins
+   ##### Anyone assigned to this group will have admin access in ArgoCD
+
     ```yaml
     apiVersion: user.openshift.io/v1
     kind: Group
@@ -173,11 +161,10 @@ This document will focus on doing everything via yaml files which will support t
     users:
     - devops
     ```
-    | |
-    | :---: |
-    | argocdaudit |
-    | Anyone assigned to this group will have readonly access in ArgoCD |
-    | |
+
+   ##### argocdaudit
+   ##### Anyone assigned to this group will have readonly access in ArgoCD
+
     ```yaml
     apiVersion: user.openshift.io/v1
     kind: Group
@@ -186,11 +173,10 @@ This document will focus on doing everything via yaml files which will support t
     users:
     - argoaudit 
     ```
-    | |
-    | :---: |
-    | app-one |
-    | Assigned users will have ArgoCD app-one AppProject RBAC access |
-    | |
+
+   ##### app-one
+   ##### Assigned users will have ArgoCD app-one AppProject RBAC access
+
     ```yaml
     apiVersion: user.openshift.io/v1
     kind: Group
@@ -199,11 +185,10 @@ This document will focus on doing everything via yaml files which will support t
     users:
     - app-one
     ```
-    | |
-    | :---: |
-    | app-two |
-    | Assigned users will have ArgoCD app-two AppProject RBAC access |
-    | |
+
+   ##### app-two
+   ##### Assigned users will have ArgoCD app-two AppProject RBAC access
+
     ```yaml
     apiVersion: user.openshift.io/v1
     kind: Group
@@ -214,11 +199,10 @@ This document will focus on doing everything via yaml files which will support t
     ```
 
 5. Create rolebindings giving accounts the admin role in thier respective namespaces
-    | |
-    | :---: |
-    | Gitops Control Plane admin |
-    | Assigned to the devops user |
-    | |
+
+   ##### Gitops Control Plane admin
+   ##### Assigned to the devops user
+
     ```yaml
     kind: RoleBinding
     metadata:
@@ -233,11 +217,10 @@ This document will focus on doing everything via yaml files which will support t
       kind: User
       name: devops
     ```
-    | |
-    | :---: |
-    | admin role: app-one |
-    | Assigned to the app-one user |
-    | |
+
+   ##### admin role: app-one
+   ##### Assigned to the app-one user
+
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
@@ -253,11 +236,10 @@ This document will focus on doing everything via yaml files which will support t
       kind: User
       name: app-one
     ```
-    | |
-    | :---: |
-    | admin role: argotest21, argotest31, argotest41 |
-    | Assigned to the app-two user |
-    | |    
+
+   ##### admin role: argotest21, argotest31, argotest41
+   ##### Assigned to the app-two user
+  
     ```yaml
     apiVersion: rbac.authorization.k8s.io/v1
     kind: RoleBinding
@@ -310,7 +292,7 @@ NOTE: The argocd instance automatically creates the default ArgoCD project.
 
 1. Create the argocd instance running in the devops namespace.  
 
-    Important components in the file below
+    Important considerations in the file below
     * You can choose to change the name of this instance to avoid confusion - this is the default value
       ```yaml
       metadata:
@@ -327,10 +309,8 @@ NOTE: The argocd instance automatically creates the default ArgoCD project.
             g, argocdaudit, role:readonly
       ```
     NOTE: This step takes a couple of minutes to complete
-    | |
-    | :------: |
-    | AppProject app-one |
-    | |    
+
+   ##### AppProject app-one
 
    ```yaml
     apiVersion: argoproj.io/v1alpha1
@@ -457,10 +437,9 @@ This will create the ArgoCD projects and associated ArgCD RBAC settings.  These 
         policies:
         - p, proj:app-one:app-one, applications, *, app-one/*, allow
       ```
-    | |
-    | :------: |
-    | AppProject app-one |
-    | |
+
+   ##### AppProject app-one
+
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: AppProject
@@ -488,10 +467,9 @@ This will create the ArgoCD projects and associated ArgCD RBAC settings.  These 
       - '*'
     ```
 2. Create the ArgoCD AppProject app-two object
-    | |
-    | :------: |
-    | AppProject app-two |
-    | |
+
+   ##### AppProject app-two
+
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: AppProject
@@ -585,10 +563,9 @@ In this example the root application will be created to automatically sync, but 
         repoURL: https://github.com/leethomasrh/argotest
         targetRevision: HEAD
     ```
-    | |
-    | :---: |
-    | root application in the app-one ArgoCD project |
-    | |
+
+   ##### root application in the app-one ArgoCD project
+
    ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
@@ -624,10 +601,9 @@ In this example the root application will be created to automatically sync, but 
     ```yaml
           project: app-one
     ```
-    | |
-    | :---: |
-    | child application in the app-one ArgoCD project |
-    | |
+
+   ##### child application in the app-one ArgoCD project
+
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
@@ -693,10 +669,9 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
           path: test
           repoURL: https://github.com/leethomasrh/argotest
       ```
-    | |
-    | :---: |
-    | application managing objects in multiple development namespaces |
-    | |
+
+   ##### application managing objects in multiple development namespaces
+
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
@@ -715,10 +690,8 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
     ```
     The following artifacts are created in the development git repository referenced in the application object above.
 
-    | |
-    | :---: |
-    | kustomization.yaml |
-    | | 
+   ##### kustomization.yaml
+
       ```yaml
       apiVersion: kustomize.config.k8s.io/v1beta1
       kind: Kustomization
@@ -728,10 +701,8 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
         - app2/replicaset.yaml
         - app3/configmap.yaml
       ```
-    | |
-    | :---: |
-    | empty configmap object in the argotest21 namespace |
-    | |
+      
+   ##### empty configmap object in the argotest21 namespace
 
       ```yaml
       apiVersion: v1
@@ -740,10 +711,9 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
         name: test-21
         namespace: argotest21
       ```
-    | |
-    | :---: |
-    | hello-openshift application in the argotest31 namespace |
-    | |
+
+   ##### hello-openshift application in the argotest31 namespace
+
       ```yaml
       apiVersion: v1
       kind: ReplicationController
@@ -767,10 +737,9 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
                 protocol: TCP
             restartPolicy: Always
       ```
-    | |
-    | :---: |
-    | empty configmap intended to be created in the argotest41 namespace but creates in the argotest21 namespace |
-    | |
+
+   ##### empty configmap intended to be created in the argotest41 namespace
+   ##### but creates in the argotest21 namespace
     
     NOTE: the namespace is intentionally not defined to demonstrate the app project default namespace
 
