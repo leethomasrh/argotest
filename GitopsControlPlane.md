@@ -63,7 +63,7 @@ This document will focus on doing everything via yaml files which will support t
       name: app-two
     ```
    ##### Argo CD Audit account
-   ##### granted read only permissions in ArgoCD
+   ###### granted read only permissions in ArgoCD
 
     ```yaml
     apiVersion: user.openshift.io/v1
@@ -310,7 +310,7 @@ NOTE: The argocd instance automatically creates the default ArgoCD project.
       ```
     NOTE: This step takes a couple of minutes to complete
 
-   ##### AppProject app-one
+   ##### ArgoCD Control Plane Instance
 
    ```yaml
     apiVersion: argoproj.io/v1alpha1
@@ -418,7 +418,7 @@ This will create the ArgoCD projects and associated ArgCD RBAC settings.  These 
 
 1. Create the ArgoCD AppProject app-one object    
 
-    Important components in the files below
+    Important considerations in the files below
 
     * the destination namespace(s) accessible by applications assigned to this app project
       ```yaml
@@ -542,7 +542,7 @@ In this example the root application will be created to automatically sync, but 
 
 2. Create the root application object
 
-    Important components in the file below:
+    Important considerations in the file below:
 
     * The app project this application will be assigned to
     ```yaml
@@ -586,7 +586,7 @@ In this example the root application will be created to automatically sync, but 
    ```
 3. Create the child application object
 
-    Important components in the file below:
+    Important considerations in the file below:
     * The metadata namespace needs to be the Gitops Control Plane namespace
     * The destination namespace needs to be the Development namespace
     ```yaml
@@ -641,7 +641,7 @@ This example creates an empty configmap object in argotest21, deploys a hello wo
 
 2. Create the application object 
 
-    Important components in the file below:
+    Important considerations in the file below:
     * The metadata namespace needs to be the Gitops Control Plane namespace
     * The destination namespace needs to be the Development namespace
       ```yaml
