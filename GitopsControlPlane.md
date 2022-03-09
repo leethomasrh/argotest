@@ -63,7 +63,7 @@ This document will focus on doing everything via yaml files which will support t
       name: app-two
     ```
    ##### Argo CD Audit account
-   ###### granted read only permissions in ArgoCD
+   ##### granted read only permissions in ArgoCD
 
     ```yaml
     apiVersion: user.openshift.io/v1
