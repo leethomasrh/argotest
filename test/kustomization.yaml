@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - app1/configmap.yaml
-  - app2/replicaset.yaml
-  - app3/configmap.yaml
+#  - app2/replicaset.yaml
+#  - app3/configmap.yaml
